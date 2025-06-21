@@ -77,3 +77,12 @@ export const findMatchingPodcast = (userMessage: string): Podcast => {
   // Default fallback
   return samplePodcasts[0];
 };
+
+// TODO: Setup an API hook and generate a podcast episode through an
+// API call
+export const generatePodcast = (userMessage: string): Podcast => {
+  const message = userMessage.toLocaleLowerCase();
+
+  // Default fallback
+  return samplePodcasts[0]
+}
