@@ -4,7 +4,7 @@ import Navigation from '@/components/Navigation';
 import ChatBox from '@/components/ChatBox';
 import PodcastRecommendation from '@/components/PodcastRecommendation';
 import HelpfulResources from '@/components/HelpfulResources';
-import { generatePodcast, type Podcast } from '@/data/podcasts';
+import { generatePodcast, type Podcast } from '@/api/podcasts';
 import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
