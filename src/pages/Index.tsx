@@ -24,16 +24,16 @@ const Index = () => {
       setIsLoading(false);
       
       toast({
-        title: "Perfect match found! 💕",
-        description: "We found a podcast episode and helpful resources just for you!",
+        title: "Custom episode generated! 💕",
+        description: "We've created a personalized podcast episode and helpful resources just for you!",
       });
     }, 2000);
   };
 
   const handleListenClick = () => {
     toast({
-      title: "Opening podcast player! 🎧",
-      description: "This would open your podcast player in a real app.",
+      title: "Playing your custom episode! 🎧",
+      description: "This would start playing your personalized podcast episode.",
     });
   };
 

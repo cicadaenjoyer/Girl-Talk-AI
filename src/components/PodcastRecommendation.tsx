@@ -44,11 +44,11 @@ const PodcastRecommendation = ({ podcast, userMessage, onListenClick }: PodcastR
           </div>
           
           <h3 className="text-3xl font-bold bg-gradient-to-r from-purple-800 to-pink-600 bg-clip-text text-transparent mb-3">
-            Perfect Podcast Match!
+            Your Custom Podcast Episode!
           </h3>
           <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 border border-purple-200/50">
             <p className="text-purple-700 italic text-lg font-medium">
-              "Based on what you shared, we think this episode will really speak to you!" 🎯
+              "We've created this special episode just for you, based on what you shared!" 🎯
             </p>
           </div>
         </div>
@@ -116,9 +116,9 @@ const PodcastRecommendation = ({ podcast, userMessage, onListenClick }: PodcastR
               <span className="text-2xl">💪</span>
             </div>
             <div>
-              <h5 className="font-bold text-purple-800 text-lg mb-2">You've got this, queen! 👑</h5>
+              <h5 className="font-bold text-purple-800 text-lg mb-2">Your personalized episode is ready! 👑</h5>
               <p className="text-purple-700 leading-relaxed">
-                Remember, every strong woman started exactly where you are right now. 
+                This episode was crafted specifically for your situation. Every strong woman started exactly where you are right now. 
                 You're already taking the brave step of seeking support, and that shows incredible strength! 
                 <span className="inline-block ml-1 text-lg">✨🌟💖</span>
               </p>
