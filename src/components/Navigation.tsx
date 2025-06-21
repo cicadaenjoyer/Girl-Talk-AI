@@ -1,14 +1,16 @@
 
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navigation = () => {
-  const [activeTab, setActiveTab] = useState('home');
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState(location.pathname);
 
   const tabs = [
-    { id: 'home', label: 'Home', icon: '🏠', gradient: 'from-pink-400 to-rose-400' },
-    { id: 'chat', label: 'Get Support', icon: '💭', gradient: 'from-purple-400 to-indigo-400' },
-    { id: 'podcasts', label: 'Browse Podcasts', icon: '🎧', gradient: 'from-blue-400 to-cyan-400' },
-    { id: 'about', label: 'About Us', icon: '💖', gradient: 'from-pink-400 to-purple-400' },
+    { id: '/', label: 'Home', icon: '🏠', gradient: 'from-pink-400 to-rose-400' },
+    { id: '/get-support', label: 'Get Support', icon: '💭', gradient: 'from-purple-400 to-indigo-400' },
+    { id: '/browse-podcasts', label: 'Browse Podcasts', icon: '🎧', gradient: 'from-blue-400 to-cyan-400' },
+    { id: '/about-us', label: 'About Us', icon: '💖', gradient: 'from-pink-400 to-purple-400' },
   ];
 
   return (
@@ -24,7 +26,7 @@ const Navigation = () => {
       
       <div className="max-w-6xl mx-auto px-4 relative z-10">
         <div className="flex items-center justify-between h-20">
-          <div className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-3">
             <div className="relative">
               <div className="w-12 h-12 bg-gradient-to-br from-pink-400 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg transform rotate-3">
                 <span className="text-2xl filter drop-shadow-sm">✨</span>
@@ -39,15 +41,16 @@ const Navigation = () => {
               </h1>
               <p className="text-xs text-purple-600/70 font-medium">Your safe space 💕</p>
             </div>
-          </div>
+          </Link>
           
           <div className="flex space-x-2">
             {tabs.map((tab) => (
-              <button
+              <Link
                 key={tab.id}
+                to={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`relative px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
-                  activeTab === tab.id
+                  location.pathname === tab.id
                     ? `bg-gradient-to-r ${tab.gradient} text-white shadow-xl`
                     : 'text-purple-600 hover:bg-white/60 backdrop-blur-sm'
                 }`}
@@ -56,10 +59,10 @@ const Navigation = () => {
                   <span className="text-lg filter drop-shadow-sm">{tab.icon}</span>
                   <span className="hidden sm:inline">{tab.label}</span>
                 </div>
-                {activeTab === tab.id && (
+                {location.pathname === tab.id && (
                   <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white rounded-full shadow-lg"></div>
                 )}
-              </button>
+              </Link>
             ))}
           </div>
         </div>
