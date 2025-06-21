@@ -74,7 +74,7 @@ const Index = () => {
           </div>
           
           <h1 className="text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-6 leading-tight">
-            SheStrong
+            Girl Talk AI
           </h1>
           <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 max-w-4xl mx-auto shadow-xl border border-white/50">
             <p className="text-2xl text-purple-700 leading-relaxed font-medium">
@@ -133,7 +133,7 @@ const Index = () => {
                 
                 <div className="flex justify-center items-center space-x-2">
                   <span className="text-lg">💝</span>
-                  <p className="text-purple-600 font-semibold text-lg">Your SheStrong Community</p>
+                  <p className="text-purple-600 font-semibold text-lg">Your Girl Talk AI Community</p>
                   <span className="text-lg">💝</span>
                 </div>
               </div>

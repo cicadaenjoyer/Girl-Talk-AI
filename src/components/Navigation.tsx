@@ -37,7 +37,7 @@ const Navigation = () => {
             </div>
             <div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-800 to-pink-600 bg-clip-text text-transparent">
-                SheStrong
+                Girl Talk AI
               </h1>
               <p className="text-xs text-purple-600/70 font-medium">Your safe space 💕</p>
             </div>
