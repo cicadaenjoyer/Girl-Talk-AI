@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import ChatBox from '@/components/ChatBox';
 import PodcastRecommendation from '@/components/PodcastRecommendation';
+import HelpfulResources from '@/components/HelpfulResources';
 import { findMatchingPodcast, type Podcast } from '@/data/podcasts';
 import { useToast } from '@/hooks/use-toast';
 
@@ -24,7 +25,7 @@ const Index = () => {
       
       toast({
         title: "Perfect match found! 💕",
-        description: "We found a podcast episode that's perfect for you!",
+        description: "We found a podcast episode and helpful resources just for you!",
       });
     }, 2000);
   };
@@ -89,14 +90,16 @@ const Index = () => {
           <ChatBox onSubmit={handleChatSubmit} isLoading={isLoading} />
         </div>
 
-        {/* Podcast Recommendation */}
+        {/* Podcast Recommendation and Resources */}
         {recommendedPodcast && !isLoading && (
-          <div className="mb-12">
+          <div className="space-y-8 mb-12">
             <PodcastRecommendation
               podcast={recommendedPodcast}
               userMessage={userMessage}
               onListenClick={handleListenClick}
             />
+            
+            <HelpfulResources userMessage={userMessage} />
           </div>
         )}
 
