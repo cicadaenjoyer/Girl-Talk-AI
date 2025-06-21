@@ -90,7 +90,7 @@ const AboutUs = () => {
           </div>
           
           <h1 className="text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-6 leading-tight">
-            About SheStrong
+            About Girl Talk AI
           </h1>
           <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 max-w-4xl mx-auto shadow-xl border border-white/50">
             <p className="text-2xl text-purple-700 leading-relaxed font-medium">
@@ -221,7 +221,7 @@ const AboutUs = () => {
               
               <div className="bg-gradient-to-r from-pink-50 to-purple-50 rounded-2xl p-6 border border-purple-200/50 mb-6">
                 <p className="text-xl text-purple-700 leading-relaxed">
-                  Ready to start your journey with SheStrong? Get personalized support and join thousands of women who are already thriving!
+                  Ready to start your journey with Girl Talk AI? Get personalized support and join thousands of women who are already thriving!
                 </p>
               </div>
               
