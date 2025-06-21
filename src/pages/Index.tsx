@@ -4,7 +4,7 @@ import Navigation from '@/components/Navigation';
 import ChatBox from '@/components/ChatBox';
 import PodcastRecommendation from '@/components/PodcastRecommendation';
 import HelpfulResources from '@/components/HelpfulResources';
-import { findMatchingPodcast, type Podcast } from '@/data/podcasts';
+import { generatePodcast, type Podcast } from '@/api/podcasts';
 import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
@@ -19,7 +19,7 @@ const Index = () => {
     
     // Simulate API call delay
     setTimeout(() => {
-      const matchedPodcast = findMatchingPodcast(message);
+      const matchedPodcast = generatePodcast(message)
       setRecommendedPodcast(matchedPodcast);
       setIsLoading(false);
       

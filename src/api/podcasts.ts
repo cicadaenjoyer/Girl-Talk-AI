@@ -63,6 +63,21 @@ export const samplePodcasts: Podcast[] = [
   }
 ];
 
+export const findMatchingPodcast = (userMessage: string): Podcast => {
+  const message = userMessage.toLowerCase();
+  
+  for (const podcast of samplePodcasts) {
+    for (const keyword of podcast.keywords) {
+      if (message.includes(keyword)) {
+        return podcast;
+      }
+    }
+  }
+  
+  // Default fallback
+  return samplePodcasts[0];
+};
+
 // TODO: Setup an API hook and generate a podcast episode through an
 // API call
 export const generatePodcast = (userMessage: string): Podcast => {
