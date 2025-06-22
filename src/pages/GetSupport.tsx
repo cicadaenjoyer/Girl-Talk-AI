@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import ChatBox from '@/components/ChatBox';
@@ -77,7 +76,6 @@ const GetSupport = () => {
           </h1>
         </div>
 
-        
         {/* Motivational Section */}
         {!recommendedPodcast && !isLoading && (
           <div className="mt-20 relative">
@@ -105,31 +103,127 @@ const GetSupport = () => {
                     But for those moments when you need an extra helping hand, here are some resources to turn to."
                   </blockquote>
                 </div>
-                
-                <div className="flex justify-center items-center space-x-2">
-                  <span className="text-lg">💝</span>
-                  <p className="text-purple-600 font-semibold text-lg">
-                  https://www.girlshealth.gov/feelings/ - For all your "what even am I feeling?" moments.
-                  https://teenmentalhealth.org/for-families/mental-health-girls/ - Mental health info tailored just for us.
-                  https://mhanational.org/issues/mental-health-young-women-girls - Real stats, real support, real you.
-                  https://www.crisistextline.org/ (Text "GIRL" to 741741) -  ext in your fuzzy blanket from anywhere.
-                  https://www.7cups.com/ - Talk to someone who actually listens.
-                  https://www.thetrevorproject.org/ - You're perfect as you are. Full stop.
-                  https://thebodypositive.org/ - Unfollow beauty myths. Follow your joy.
-                  https://sadgirlsclub.org/ - For millennial and Gen Z girls dealing with depression + anxiety.
-                  https://www.youngminds.org.uk/young-person/blog/what-is-self-care/ - Real self-care (like saying no, not just bubble baths).
-                  https://minddoc.com/en/ - Track your feels, learn your patterns.
-                  
 
-                  
-                  </p>
-                  <span className="text-lg">💝</span>
+                {/* Fixed Resources Section */}
+                <div className="flex justify-center items-start space-x-4 p-6 bg-purple-50 rounded-lg">
+                  <span className="text-2xl">💝</span>
+                  <div className="flex-1 max-w-4xl">
+                    <ul className="space-y-3">
+                      <li>
+                        <a 
+                          href="https://www.girlshealth.gov/feelings/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="block p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-purple-400 hover:border-purple-600 group"
+                        >
+                          <span className="text-purple-700 font-semibold group-hover:text-purple-800">girlshealth.gov</span>
+                          <span className="text-gray-600 ml-2">– For all your "what even am I feeling?" moments.</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="https://teenmentalhealth.org/for-families/mental-health-girls/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="block p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-purple-400 hover:border-purple-600 group"
+                        >
+                          <span className="text-purple-700 font-semibold group-hover:text-purple-800">Teen Mental Health</span>
+                          <span className="text-gray-600 ml-2">– Mental health info tailored just for us.</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="https://mhanational.org/issues/mental-health-young-women-girls" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="block p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-purple-400 hover:border-purple-600 group"
+                        >
+                          <span className="text-purple-700 font-semibold group-hover:text-purple-800">Mental Health America</span>
+                          <span className="text-gray-600 ml-2">– Real stats, real support, real you.</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="https://www.crisistextline.org/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="block p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-purple-400 hover:border-purple-600 group"
+                        >
+                          <span className="text-purple-700 font-semibold group-hover:text-purple-800">Crisis Text Line (Text "GIRL" to 741741)</span>
+                          <span className="text-gray-600 ml-2">– Text in your fuzzy blanket from anywhere.</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="https://www.7cups.com/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="block p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-purple-400 hover:border-purple-600 group"
+                        >
+                          <span className="text-purple-700 font-semibold group-hover:text-purple-800">7 Cups</span>
+                          <span className="text-gray-600 ml-2">– Talk to someone who actually listens.</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="https://www.thetrevorproject.org/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="block p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-purple-400 hover:border-purple-600 group"
+                        >
+                          <span className="text-purple-700 font-semibold group-hover:text-purple-800">The Trevor Project</span>
+                          <span className="text-gray-600 ml-2">– You're perfect as you are. Full stop.</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="https://www.thebodypositive.org/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="block p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-purple-400 hover:border-purple-600 group"
+                        >
+                          <span className="text-purple-700 font-semibold group-hover:text-purple-800">The Body Positive</span>
+                          <span className="text-gray-600 ml-2">– Unfollow beauty myths. Follow your joy.</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="https://www.sadgirlsclub.org/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="block p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-purple-400 hover:border-purple-600 group"
+                        >
+                          <span className="text-purple-700 font-semibold group-hover:text-purple-800">Sad Girls Club</span>
+                          <span className="text-gray-600 ml-2">– For millennial and Gen Z girls dealing with depression + anxiety.</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="https://www.youngminds.org.uk/young-person/blog/what-is-self-care/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="block p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-purple-400 hover:border-purple-600 group"
+                        >
+                          <span className="text-purple-700 font-semibold group-hover:text-purple-800">YoungMinds</span>
+                          <span className="text-gray-600 ml-2">– Real self-care (like saying no, not just bubble baths).</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="https://minddoc.com/en/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="block p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-purple-400 hover:border-purple-600 group"
+                        >
+                          <span className="text-purple-700 font-semibold group-hover:text-purple-800">MindDoc</span>
+                          <span className="text-gray-600 ml-2">– Track your feels, learn your patterns.</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <span className="text-2xl">💝</span>
                 </div>
               </div>
-              
-              {/* Corner decorations */}
-              <div className="absolute bottom-4 left-4 text-pink-300/40 text-2xl">🌸</div>
-              <div className="absolute top-4 right-4 text-purple-300/40 text-2xl">✨</div>
             </div>
           </div>
         )}
