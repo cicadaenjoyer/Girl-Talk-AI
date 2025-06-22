@@ -102,13 +102,27 @@ const GetSupport = () => {
                 <div className="bg-gradient-to-r from-pink-50 to-purple-50 rounded-2xl p-6 border border-purple-200/50 mb-6">
                   <blockquote className="text-xl text-purple-700 italic font-medium leading-relaxed">
                     "Your feelings are valid, your struggles are real, and your strength is incredible. 
-                    Tell us what's on your heart, and we'll create something beautiful just for you."
+                    But for those moments when you need an extra helping hand, here are some resources to turn to."
                   </blockquote>
                 </div>
                 
                 <div className="flex justify-center items-center space-x-2">
                   <span className="text-lg">💝</span>
-                  <p className="text-purple-600 font-semibold text-lg">Ready to listen and support you</p>
+                  <p className="text-purple-600 font-semibold text-lg">
+                  https://www.girlshealth.gov/feelings/ - For all your "what even am I feeling?" moments.
+                  https://teenmentalhealth.org/for-families/mental-health-girls/ - Mental health info tailored just for us.
+                  https://mhanational.org/issues/mental-health-young-women-girls - Real stats, real support, real you.
+                  https://www.crisistextline.org/ (Text "GIRL" to 741741) -  ext in your fuzzy blanket from anywhere.
+                  https://www.7cups.com/ - Talk to someone who actually listens.
+                  https://www.thetrevorproject.org/ - You're perfect as you are. Full stop.
+                  https://thebodypositive.org/ - Unfollow beauty myths. Follow your joy.
+                  https://sadgirlsclub.org/ - For millennial and Gen Z girls dealing with depression + anxiety.
+                  https://www.youngminds.org.uk/young-person/blog/what-is-self-care/ - Real self-care (like saying no, not just bubble baths).
+                  https://minddoc.com/en/ - Track your feels, learn your patterns.
+                  
+
+                  
+                  </p>
                   <span className="text-lg">💝</span>
                 </div>
               </div>
