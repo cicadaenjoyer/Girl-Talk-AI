@@ -2,9 +2,8 @@
 import React from 'react';
 import Navigation from '@/components/Navigation';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/hooks/use-toast';
 
-const BrowsePodcasts = () => {
+const BrowsePodcastsPage = () => {
   const { toast } = useToast();
 
   const podcastCategories = [
@@ -90,6 +89,13 @@ const BrowsePodcasts = () => {
           <h1 className="text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-6 leading-tight">
             Browse Podcasts
           </h1>
+          <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 max-w-4xl mx-auto shadow-xl border border-white/50">
+            <p className="text-2xl text-purple-700 leading-relaxed font-medium">
+              Share what's on your mind and we'll create a personalized podcast episode just for you. 
+              You're not alone in this journey! 
+              <span className="inline-block ml-2 text-3xl">🌟💪✨</span>
+            </p>
+          </div>
           <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 max-w-4xl mx-auto shadow-xl border border-white/50">
             <p className="text-2xl text-purple-700 leading-relaxed font-medium">
               Discover our curated collection of empowering podcast episodes designed specifically for strong women like you!
@@ -183,6 +189,126 @@ const BrowsePodcasts = () => {
           </div>
         </div>
       </main>
+    </div>
+  );
+};
+
+export { BrowsePodcastsPage };
+import { useState } from 'react';
+import ChatBox from '@/components/ChatBox';
+import { useToast } from '@/hooks/use-toast';
+
+const BrowsePodcasts = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
+  const handleChatSubmit = async (message: string) => {
+    setIsLoading(true);
+
+    // Simulate API call delay
+    setTimeout(() => {
+      toast({
+        title: "Message received! 💬",
+        description: "Thank you for sharing your thoughts. We'll get back to you shortly!",
+      });
+      setIsLoading(false);
+    }, 2000);
+  };
+
+  const podcastCategories = [
+    {
+      title: "Career & Confidence",
+      icon: "💼",
+      gradient: "from-purple-400 to-indigo-400",
+      episodes: ["Negotiating Your Worth", "Leadership Skills", "Imposter Syndrome Solutions"]
+    },
+    {
+      title: "Relationships & Love",
+      icon: "💕",
+      gradient: "from-pink-400 to-purple-400",
+      episodes: ["Healthy Boundaries", "Self-Love First", "Communication Mastery"]
+    },
+    {
+      title: "Mental Health",
+      icon: "🧠",
+      gradient: "from-blue-400 to-cyan-400",
+      episodes: ["Anxiety Management", "Depression Support", "Building Resilience"]
+    },
+    {
+      title: "Personal Growth",
+      icon: "🌱",
+      gradient: "from-green-400 to-emerald-400",
+      episodes: ["Goal Setting", "Habit Building", "Finding Your Purpose"]
+    },
+    {
+      title: "Life Transitions",
+      icon: "🦋",
+      gradient: "from-purple-400 to-pink-400",
+      episodes: ["Career Changes", "Moving Forward", "New Beginnings"]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 via-blue-50 to-indigo-100 relative overflow-hidden">
+      {/* Floating background decorations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-pink-200 to-purple-200 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-blue-200 to-pink-200 rounded-full opacity-25 animate-bounce"></div>
+      </div>
+
+      {/* Hero Section */}
+      <div className="text-center mb-16 relative">
+        <div className="flex justify-center items-center space-x-4 mb-6">
+          <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-purple-500 rounded-3xl flex items-center justify-center shadow-xl transform rotate-6">
+            <span className="text-3xl">🎧</span>
+          </div>
+          <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-blue-500 rounded-3xl flex items-center justify-center shadow-xl transform -rotate-3">
+            <span className="text-4xl">🎙️</span>
+          </div>
+          <div className="w-14 h-14 bg-gradient-to-br from-blue-400 to-pink-400 rounded-2xl flex items-center justify-center shadow-lg transform rotate-12">
+            <span className="text-2xl">🎵</span>
+          </div>
+        </div>
+
+        <h1 className="text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-6 leading-tight">
+          Browse Podcasts
+        </h1>
+        <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 max-w-4xl mx-auto shadow-xl border border-white/50">
+          <p className="text-2xl text-purple-700 leading-relaxed font-medium">
+            Share what's on your mind and we'll create a personalized podcast episode just for you. 
+            You're not alone in this journey! 
+            <span className="inline-block ml-2 text-3xl">🌟💪✨</span>
+          </p>
+        </div>
+      </div>
+
+      {/* Chat Interface */}
+      <div className="mb-12">
+        <ChatBox onSubmit={handleChatSubmit} isLoading={isLoading} />
+      </div>
+
+      {/* Podcast Categories */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {podcastCategories.map((category, index) => (
+          <div key={category.title} className="bg-white/70 backdrop-blur-lg rounded-3xl p-8 shadow-xl border border-white/60 relative overflow-hidden transform hover:scale-105 transition-all duration-300">
+            <div className={`absolute top-0 left-0 w-full h-2 bg-gradient-to-r ${category.gradient}`}></div>
+            
+            <div className="text-center mb-6">
+              <div className={`w-16 h-16 bg-gradient-to-br ${category.gradient} rounded-3xl flex items-center justify-center shadow-xl mx-auto mb-4 transform hover:rotate-12 transition-transform duration-300`}>
+                <span className="text-3xl">{category.icon}</span>
+              </div>
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-800 to-pink-600 bg-clip-text text-transparent">
+                {category.title}
+              </h3>
+              <ul className="mt-4 space-y-2">
+                {category.episodes.map((episode, idx) => (
+                  <li key={idx} className="text-purple-700 font-medium">{episode}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
