@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { playSpeechSynthesis } from '@/api/podcasts';
+import { playSpeechSynthesis, stopSpeechSynthesis } from '@/api/podcasts';
 
 interface Podcast {
     id: string;
@@ -56,6 +56,18 @@ const PodcastRecommendation = ({
                 console.error('Error playing fallback speech synthesis:', error);
                 setIsPlaying(false);
             }
+        }
+    };
+
+    const handleStopAudio = () => {
+        setIsPlaying(false);
+        stopSpeechSynthesis();
+        
+        // Also stop regular audio if it's playing
+        const audioElement = document.getElementById('podcast-audio') as HTMLAudioElement;
+        if (audioElement) {
+            audioElement.pause();
+            audioElement.currentTime = 0;
         }
     };
     return (
@@ -142,42 +154,57 @@ const PodcastRecommendation = ({
                                 </span>
                             </div>
 
-                            <Button
-                                onClick={() => {
-                                    onListenClick();
-                                    handlePlayAudio();
-                                }}
-                                disabled={isPlaying}
-                                className="bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 hover:from-purple-600 hover:via-pink-600 hover:to-blue-600 text-white font-bold px-8 py-3 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
-                            >
-                                <div className="flex items-center space-x-2 relative z-10">
-                                    {isPlaying ? (
-                                        <>
-                                            <span className="text-xl animate-pulse">🎵</span>
-                                            <span className="text-lg">Playing...</span>
-                                            <span className="text-xl animate-spin">⏸️</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span className="text-xl">🎵</span>
-                                            <span className="text-lg">Listen Now</span>
-                                            <span className="text-xl">▶️</span>
-                                        </>
-                                    )}
-                                    {podcast.audioUrl && !podcast.audioUrl.startsWith('speech-synthesis:') && (
-                                        <audio
-                                            id="podcast-audio"
-                                            controls
-                                            src={podcast.audioUrl}
-                                            className="hidden"
-                                        >
-                                            Your browser does not support the
-                                            audio element.
-                                        </audio>
-                                    )}
-                                </div>
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full hover:translate-x-full transition-transform duration-700"></div>
-                            </Button>
+                            <div className="flex space-x-3">
+                                <Button
+                                    onClick={() => {
+                                        onListenClick();
+                                        handlePlayAudio();
+                                    }}
+                                    disabled={isPlaying}
+                                    className="bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 hover:from-purple-600 hover:via-pink-600 hover:to-blue-600 text-white font-bold px-8 py-3 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+                                >
+                                    <div className="flex items-center space-x-2 relative z-10">
+                                        {isPlaying ? (
+                                            <>
+                                                <span className="text-xl animate-pulse">🎵</span>
+                                                <span className="text-lg">Playing...</span>
+                                                <span className="text-xl animate-spin">🔄</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <span className="text-xl">🎵</span>
+                                                <span className="text-lg">Listen Now</span>
+                                                <span className="text-xl">▶️</span>
+                                            </>
+                                        )}
+                                    </div>
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full hover:translate-x-full transition-transform duration-700"></div>
+                                </Button>
+                                
+                                {isPlaying && (
+                                    <Button
+                                        onClick={handleStopAudio}
+                                        className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-bold px-6 py-3 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                                    >
+                                        <div className="flex items-center space-x-2">
+                                            <span className="text-xl">⏹️</span>
+                                            <span className="text-lg">Stop</span>
+                                        </div>
+                                    </Button>
+                                )}
+                                
+                                {podcast.audioUrl && !podcast.audioUrl.startsWith('speech-synthesis:') && (
+                                    <audio
+                                        id="podcast-audio"
+                                        controls
+                                        src={podcast.audioUrl}
+                                        className="hidden"
+                                    >
+                                        Your browser does not support the
+                                        audio element.
+                                    </audio>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
