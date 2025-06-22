@@ -16,7 +16,10 @@ import { generatePodcast, playSpeechSynthesis } from './src/api/podcasts.js';
 generatePodcast("I'm feeling really insecure about my body")
     .then(podcast => {
         console.log('✅ Podcast generated successfully:', podcast.title);
-        console.log('Generated script length:', podcast.generatedScript?.length);
+        console.log(
+            'Generated script length:',
+            podcast.generatedScript?.length
+        );
         console.log('Audio URL:', podcast.audioUrl);
     })
     .catch(error => {

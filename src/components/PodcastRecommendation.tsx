@@ -32,7 +32,9 @@ const PodcastRecommendation = ({
             // Handle speech synthesis
             try {
                 setIsPlaying(true);
-                await playSpeechSynthesis(podcast.generatedScript || podcast.description);
+                await playSpeechSynthesis(
+                    podcast.generatedScript || podcast.description
+                );
                 setIsPlaying(false);
             } catch (error) {
                 console.error('Error playing speech synthesis:', error);
@@ -50,10 +52,15 @@ const PodcastRecommendation = ({
             // Fallback to speech synthesis with generated script
             try {
                 setIsPlaying(true);
-                await playSpeechSynthesis(podcast.generatedScript || podcast.description);
+                await playSpeechSynthesis(
+                    podcast.generatedScript || podcast.description
+                );
                 setIsPlaying(false);
             } catch (error) {
-                console.error('Error playing fallback speech synthesis:', error);
+                console.error(
+                    'Error playing fallback speech synthesis:',
+                    error
+                );
                 setIsPlaying(false);
             }
         }
@@ -62,9 +69,11 @@ const PodcastRecommendation = ({
     const handleStopAudio = () => {
         setIsPlaying(false);
         stopSpeechSynthesis();
-        
+
         // Also stop regular audio if it's playing
-        const audioElement = document.getElementById('podcast-audio') as HTMLAudioElement;
+        const audioElement = document.getElementById(
+            'podcast-audio'
+        ) as HTMLAudioElement;
         if (audioElement) {
             audioElement.pause();
             audioElement.currentTime = 0;
@@ -166,21 +175,33 @@ const PodcastRecommendation = ({
                                     <div className="flex items-center space-x-2 relative z-10">
                                         {isPlaying ? (
                                             <>
-                                                <span className="text-xl animate-pulse">🎵</span>
-                                                <span className="text-lg">Playing...</span>
-                                                <span className="text-xl animate-spin">🔄</span>
+                                                <span className="text-xl animate-pulse">
+                                                    🎵
+                                                </span>
+                                                <span className="text-lg">
+                                                    Playing...
+                                                </span>
+                                                <span className="text-xl animate-spin">
+                                                    🔄
+                                                </span>
                                             </>
                                         ) : (
                                             <>
-                                                <span className="text-xl">🎵</span>
-                                                <span className="text-lg">Listen Now</span>
-                                                <span className="text-xl">▶️</span>
+                                                <span className="text-xl">
+                                                    🎵
+                                                </span>
+                                                <span className="text-lg">
+                                                    Listen Now
+                                                </span>
+                                                <span className="text-xl">
+                                                    ▶️
+                                                </span>
                                             </>
                                         )}
                                     </div>
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full hover:translate-x-full transition-transform duration-700"></div>
                                 </Button>
-                                
+
                                 {isPlaying && (
                                     <Button
                                         onClick={handleStopAudio}
@@ -188,22 +209,27 @@ const PodcastRecommendation = ({
                                     >
                                         <div className="flex items-center space-x-2">
                                             <span className="text-xl">⏹️</span>
-                                            <span className="text-lg">Stop</span>
+                                            <span className="text-lg">
+                                                Stop
+                                            </span>
                                         </div>
                                     </Button>
                                 )}
-                                
-                                {podcast.audioUrl && !podcast.audioUrl.startsWith('speech-synthesis:') && (
-                                    <audio
-                                        id="podcast-audio"
-                                        controls
-                                        src={podcast.audioUrl}
-                                        className="hidden"
-                                    >
-                                        Your browser does not support the
-                                        audio element.
-                                    </audio>
-                                )}
+
+                                {podcast.audioUrl &&
+                                    !podcast.audioUrl.startsWith(
+                                        'speech-synthesis:'
+                                    ) && (
+                                        <audio
+                                            id="podcast-audio"
+                                            controls
+                                            src={podcast.audioUrl}
+                                            className="hidden"
+                                        >
+                                            Your browser does not support the
+                                            audio element.
+                                        </audio>
+                                    )}
                             </div>
                         </div>
                     </div>

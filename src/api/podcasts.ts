@@ -128,7 +128,7 @@ export const generateScript = async (
 ): Promise<string> => {
     // For now, return a personalized script based on the category and user message
     // In production, this would be handled by a backend server
-    
+
     const scripts = {
         'Self-Confidence': `Hi! My name is Aisha, and this is Girl Talk AI. I hear you're struggling with confidence, and I want you to know that what you're feeling is completely normal and valid. 
 
@@ -140,7 +140,7 @@ Remember, you don't need anyone else's permission to be yourself. You are enough
 
 When doubt creeps in - and it will - remind yourself of three things you're good at. Write them down. Keep that list close. You've got this, and I believe in you!`,
 
-        'Relationships': `Hi! My name is Aisha, and this is Girl Talk AI. Friendship drama can feel overwhelming, but you're not alone in this. Every girl goes through friendship challenges - it's part of learning how to build healthy relationships.
+        Relationships: `Hi! My name is Aisha, and this is Girl Talk AI. Friendship drama can feel overwhelming, but you're not alone in this. Every girl goes through friendship challenges - it's part of learning how to build healthy relationships.
 
 Here's the thing about good friendships: they should make you feel supported, not drained. If someone is consistently making you feel bad about yourself, that's not about you - it's about them and their own insecurities.
 
@@ -174,7 +174,7 @@ Remember, beauty standards are made up and constantly changing. What never chang
 
 Your body is your home for life - treat it with kindness, nourish it well, and celebrate all the amazing things it does for you every day.`,
 
-        'Empowerment': `Hi! My name is Aisha, and this is Girl Talk AI. Dealing with bullying or mean behavior is never easy, but I want you to know that you have more power than you realize.
+        Empowerment: `Hi! My name is Aisha, and this is Girl Talk AI. Dealing with bullying or mean behavior is never easy, but I want you to know that you have more power than you realize.
 
 First, this is not your fault. Bullies act out because of their own insecurities and problems - it's never about you. You don't deserve to be treated badly, ever.
 
@@ -187,14 +187,15 @@ Practice confident body language - stand tall, make eye contact, speak clearly. 
 Remember, you are strong, you are worthy, and you deserve to be treated with respect. Don't let anyone dim your light. The world needs your brightness.`
     };
 
-    const script = scripts[category as keyof typeof scripts] || scripts['Self-Confidence'];
-    
+    const script =
+        scripts[category as keyof typeof scripts] || scripts['Self-Confidence'];
+
     // Add personalization based on user message
     const personalizedScript = script.replace(
         "I hear you're struggling with",
         `I hear you're dealing with "${userMessage}" and struggling with`
     );
-    
+
     return personalizedScript;
 };
 
@@ -203,34 +204,35 @@ export const generateAudio = async (text: string): Promise<string | null> => {
     try {
         // Check if browser supports Speech Synthesis
         if ('speechSynthesis' in window) {
-            return new Promise((resolve) => {
+            return new Promise(resolve => {
                 // Create a new SpeechSynthesisUtterance
                 const utterance = new SpeechSynthesisUtterance(text);
-                
+
                 // Configure the voice
                 utterance.rate = 0.9; // Slightly slower for better clarity
                 utterance.pitch = 1.1; // Slightly higher pitch for a friendly tone
                 utterance.volume = 1;
-                
+
                 // Try to find a female voice
                 const voices = speechSynthesis.getVoices();
-                const femaleVoice = voices.find(voice => 
-                    voice.name.toLowerCase().includes('female') || 
-                    voice.name.toLowerCase().includes('samantha') ||
-                    voice.name.toLowerCase().includes('karen') ||
-                    voice.name.toLowerCase().includes('moira')
+                const femaleVoice = voices.find(
+                    voice =>
+                        voice.name.toLowerCase().includes('female') ||
+                        voice.name.toLowerCase().includes('samantha') ||
+                        voice.name.toLowerCase().includes('karen') ||
+                        voice.name.toLowerCase().includes('moira')
                 );
-                
+
                 if (femaleVoice) {
                     utterance.voice = femaleVoice;
                 }
-                
+
                 // For demo purposes, we'll return a special identifier
                 // that components can use to trigger speech synthesis
                 resolve(`speech-synthesis:${Date.now()}`);
             });
         }
-        
+
         // Fallback: return null to indicate no audio available
         return null;
     } catch (error) {
@@ -251,63 +253,71 @@ export const playSpeechSynthesis = (text: string): Promise<void> => {
         speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
-        
+
         // Configure the voice
         utterance.rate = 0.9;
         utterance.pitch = 1.1;
         utterance.volume = 1;
-        
+
         // Wait for voices to load if needed
         const setVoiceAndSpeak = () => {
             const voices = speechSynthesis.getVoices();
-            
+
             // Try to find a good female voice
             const preferredVoices = [
-                'Samantha', 'Karen', 'Moira', 'Victoria', 'Alex', 'Allison'
+                'Samantha',
+                'Karen',
+                'Moira',
+                'Victoria',
+                'Alex',
+                'Allison'
             ];
-            
+
             let selectedVoice = null;
-            
+
             // First, try to find a voice by name
             for (const voiceName of preferredVoices) {
-                selectedVoice = voices.find(voice => 
+                selectedVoice = voices.find(voice =>
                     voice.name.toLowerCase().includes(voiceName.toLowerCase())
                 );
                 if (selectedVoice) break;
             }
-            
+
             // If no preferred voice found, look for any English female voice
             if (!selectedVoice) {
-                selectedVoice = voices.find(voice => 
-                    voice.lang.startsWith('en') && 
-                    (voice.name.toLowerCase().includes('female') || 
-                     voice.name.toLowerCase().includes('woman'))
+                selectedVoice = voices.find(
+                    voice =>
+                        voice.lang.startsWith('en') &&
+                        (voice.name.toLowerCase().includes('female') ||
+                            voice.name.toLowerCase().includes('woman'))
                 );
             }
-            
+
             // If still no voice, just use the first English voice
             if (!selectedVoice) {
-                selectedVoice = voices.find(voice => voice.lang.startsWith('en'));
+                selectedVoice = voices.find(voice =>
+                    voice.lang.startsWith('en')
+                );
             }
-            
+
             if (selectedVoice) {
                 utterance.voice = selectedVoice;
             }
-            
+
             utterance.onend = () => {
                 console.log('Speech synthesis completed');
                 resolve();
             };
-            
-            utterance.onerror = (event) => {
+
+            utterance.onerror = event => {
                 console.error('Speech synthesis error:', event.error);
                 reject(new Error(`Speech synthesis error: ${event.error}`));
             };
-            
+
             utterance.onstart = () => {
                 console.log('Speech synthesis started');
             };
-            
+
             try {
                 speechSynthesis.speak(utterance);
             } catch (error) {
@@ -323,11 +333,13 @@ export const playSpeechSynthesis = (text: string): Promise<void> => {
             let voicesLoaded = false;
             const timeout = setTimeout(() => {
                 if (!voicesLoaded) {
-                    console.warn('Voices loading timeout, proceeding with default voice');
+                    console.warn(
+                        'Voices loading timeout, proceeding with default voice'
+                    );
                     setVoiceAndSpeak();
                 }
             }, 1000);
-            
+
             speechSynthesis.onvoiceschanged = () => {
                 if (!voicesLoaded) {
                     voicesLoaded = true;
@@ -377,7 +389,10 @@ export const generatePodcast = async (
         console.error('Error generating personalized podcast:', error);
 
         // Fallback: Create podcast with generated script but no audio
-        const fallbackScript = await generateScript(userMessage, matchedPodcast.category);
+        const fallbackScript = await generateScript(
+            userMessage,
+            matchedPodcast.category
+        );
 
         return {
             ...matchedPodcast,
