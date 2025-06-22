@@ -115,7 +115,7 @@ const PodcastRecommendation = ({
                 </p>
               </div>
 
-              <p className="text-gray-700 text-base mb-4 leading-relaxed bg-gradient-to-r from-pink-50 to-purple-50 p-3 rounded-xl border border-purple-100">
+              <p className="text-gray-700 text-base mb-4 leading-relaxed bg-gradient-to-r from-pink-50 to-purple-50 p-3 rounded-xl border border-purple-100 max-h-64 overflow-y-auto">
                 {podcast.description}
               </p>
 

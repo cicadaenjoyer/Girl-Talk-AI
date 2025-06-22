@@ -168,7 +168,7 @@ export const generateAudio = async (text: string): Promise<string | null> => {
   try {
     const response = await axios.post("/api/generatePodcast", {
       text,
-      voiceId: "en-US-terrell",
+      voiceId: "en-US-ariana",
     });
     return response.data.audioFile || null;
   } catch (error) {
