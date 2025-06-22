@@ -27,14 +27,17 @@ const Navigation = () => {
       <div className="max-w-6xl mx-auto px-4 relative z-10">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center space-x-3">
-            <div className="relative">
-              <div className="w-12 h-12 bg-gradient-to-br from-pink-400 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg transform rotate-3">
-                <span className="text-2xl filter drop-shadow-sm">✨</span>
-              </div>
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-300 rounded-full flex items-center justify-center text-xs">
-                💫
-              </div>
+            
+          <div className="relative">
+            <img 
+              src="/logo.png" 
+              alt="Girl Talk AI Logo" 
+              className="w-12 h-12 rounded-2xl shadow-lg transform rotate-3"
+            />
+            <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-300 rounded-full flex items-center justify-center text-xs">
+              💫
             </div>
+          </div>
             <div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-800 to-pink-600 bg-clip-text text-transparent">
                 Girl Talk AI
