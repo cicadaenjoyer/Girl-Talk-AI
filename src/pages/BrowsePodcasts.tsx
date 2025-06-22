@@ -107,13 +107,7 @@ const BrowsePodcastsPage = () => {
           <h1 className="text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-6 leading-tight">
             Browse Podcasts
           </h1>
-          <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 max-w-4xl mx-auto shadow-xl border border-white/50">
-            <p className="text-2xl text-purple-700 leading-relaxed font-medium">
-              Share what's on your mind and we'll create a personalized podcast episode just for you. 
-              You're not alone in this journey! 
-              <span className="inline-block ml-2 text-3xl">🌟💪✨</span>
-            </p>
-          </div>
+          
           <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 max-w-4xl mx-auto shadow-xl border border-white/50">
             <p className="text-2xl text-purple-700 leading-relaxed font-medium">
               Discover our curated collection of empowering podcast episodes designed specifically for strong women like you!
@@ -124,6 +118,13 @@ const BrowsePodcastsPage = () => {
         
         <div className="mb-12">
           <ChatBox onSubmit={handleChatSubmit} isLoading={isLoading} />
+        </div>
+
+        <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 max-w-4xl mx-auto shadow-xl border border-white/50">
+          <p className="text-2xl text-purple-700 leading-relaxed font-medium">
+            Discover our curated collection of empowering podcast episodes designed specifically for strong women like you!
+            <span className="inline-block ml-2 text-3xl">🌟💪✨</span>
+         </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
