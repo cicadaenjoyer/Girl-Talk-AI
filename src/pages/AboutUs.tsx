@@ -6,34 +6,41 @@ import { Button } from '@/components/ui/button';
 const AboutUs = () => {
   const teamMembers = [
     {
-      name: "Sarah Chen",
-      role: "Founder & CEO",
+      name: "Akriti Batra",
+      role: "Co-Founder",
       icon: "👩‍💼",
       gradient: "from-pink-400 to-rose-400",
       description: "Passionate about empowering women through technology and storytelling."
     },
     {
-      name: "Maya Rodriguez",
-      role: "Head of Content",
-      icon: "🎙️",
+      name: "Abraham Hernandez",
+      role: "Co-Founder",
+      icon: "🧠",
       gradient: "from-purple-400 to-indigo-400",
-      description: "Expert in creating meaningful content that resonates with women's experiences."
+      description: "Tech enthusiast with a vision to revolutionize mental health support using AI."
     },
     {
-      name: "Dr. Amanda Foster",
-      role: "Mental Health Advisor",
-      icon: "🧠",
+      name: "Tom Strzyz",
+      role: "Co-Founder",
+      icon: "👨‍💻",
       gradient: "from-blue-400 to-cyan-400",
-      description: "Licensed therapist specializing in women's mental health and wellness."
+      description: "Creative coder and advocate, dedicated to building supportive communities."
+    },
+    {
+      name: "Luis Abrantes",
+      role: "Co-Founder",
+      icon: "👨‍🔧",
+      gradient: "from-green-400 to-emerald-400",
+      description: "Developer with a passion for creating inclusive spaces and innovative solutions."
     }
   ];
 
   const values = [
     {
-      title: "Authenticity",
+      title: "Empowerment",
       icon: "💎",
       gradient: "from-pink-400 to-purple-400",
-      description: "We believe in real stories, genuine support, and authentic connections."
+      description: "We're here to lift you up and remind you of your incredible strength."
     },
     {
       title: "Inclusivity",
@@ -42,16 +49,16 @@ const AboutUs = () => {
       description: "Every woman deserves support, regardless of background, age, or circumstances."
     },
     {
-      title: "Empowerment",
+      title: "Empathy",
       icon: "💪",
       gradient: "from-blue-400 to-pink-400",
-      description: "We're here to lift you up and remind you of your incredible strength."
+      description: "We listen, we understand, and we care deeply about your journey."
     },
     {
       title: "Innovation",
       icon: "✨",
       gradient: "from-green-400 to-emerald-400",
-      description: "Using cutting-edge AI to create personalized support experiences."
+      description: "We leverage the latest technology to provide personalized support and resources."
     }
   ];
 
@@ -112,7 +119,7 @@ const AboutUs = () => {
               <div className="bg-gradient-to-r from-pink-50 to-purple-50 rounded-2xl p-8 border border-purple-200/50">
                 <p className="text-xl text-purple-700 leading-relaxed font-medium">
                   To create a safe, supportive space where every woman can find the guidance, inspiration, and strength she needs to navigate life's challenges. 
-                  Through personalized AI-generated content and curated resources, we're revolutionizing how women access mental health support and personal development.
+                  Through personalized AI-generated content and curated resources, we're creating a world where women feel heard, valued, and empowered to achieve their dreams.
                 </p>
               </div>
             </div>

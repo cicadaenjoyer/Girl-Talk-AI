@@ -78,8 +78,8 @@ const Index = () => {
           </h1>
           <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 max-w-4xl mx-auto shadow-xl border border-white/50">
             <p className="text-2xl text-purple-700 leading-relaxed font-medium">
-              Your safe space to find guidance, inspiration, and the perfect podcast to help you navigate 
-              life's challenges. You're stronger than you know! 
+              Your safe space to find guidance, inspiration, and a personalized podcast to help you navigate 
+              life's challenges. You're heard, you're understood and your voice matters.
               <span className="inline-block ml-2 text-3xl">🌟💕✨</span>
             </p>
           </div>
@@ -133,7 +133,7 @@ const Index = () => {
                 
                 <div className="flex justify-center items-center space-x-2">
                   <span className="text-lg">💝</span>
-                  <p className="text-purple-600 font-semibold text-lg">Your Girl Talk AI Community</p>
+                  <p className="text-purple-600 font-semibold text-lg">Your AI Big Sister</p>
                   <span className="text-lg">💝</span>
                 </div>
               </div>
