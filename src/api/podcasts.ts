@@ -162,7 +162,7 @@ just output the script, absolutely no fluff
     );
   } catch (error) {
     console.error("Error generating script:", error);
-    return `Hi! My name is Aisha, and this is Girl Talk AI. I understand you're dealing with: \"${userMessage}\". Let me help you with that.`;
+    return `Hi! My name is Aisha, and this is Girl Talk AI. I understand you're dealing with: "${userMessage}". Let me help you with that.`;
   }
 };
 

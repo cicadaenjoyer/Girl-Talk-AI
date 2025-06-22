@@ -9,6 +9,10 @@ app.use(cors());
 app.post("/api/generatePodcast", async (req, res) => {
   const { text, voiceId } = req.body;
   try {
+    const api = import.meta.env.MURF_API_KEY;
+    if (!api) {
+      return res.status(500).json({ error: "MURF_API_KEY is not set" });
+    }
     const response = await axios.post(
       "https://api.murf.ai/v1/speech/generate",
       { text, voiceId },
@@ -17,7 +21,7 @@ app.post("/api/generatePodcast", async (req, res) => {
           "Content-Type": "application/json",
           Accept: "application/json",
           //   "api-key": process.env.MURF_API_KEY,
-          "api-key": "ap2_b7936677-f74d-43d0-a993-40d78f812b69",
+          "api-key": api,
         },
       }
     );

@@ -4,14 +4,16 @@ import ChatBox from "@/components/ChatBox";
 import PodcastRecommendation from "@/components/PodcastRecommendation";
 import HelpfulResources from "@/components/HelpfulResources";
 import { generatePodcast, type Podcast } from "@/api/podcasts";
+import { useUser } from "@/context/UserContext";
 import { useToast } from "@/hooks/use-toast";
-
+import { storePodcast } from "@/api/firebase";
 const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [recommendedPodcast, setRecommendedPodcast] = useState<Podcast | null>(
     null
   );
   const [userMessage, setUserMessage] = useState("");
+  const user = useUser();
   const { toast } = useToast();
 
   const handleChatSubmit = async (message: string) => {
@@ -21,6 +23,7 @@ const Index = () => {
     try {
       const matchedPodcast = await generatePodcast(message);
       setRecommendedPodcast(matchedPodcast);
+      storePodcast(matchedPodcast, String(user.db_id));
       toast({
         title: "Custom episode generated! 💕",
         description:
@@ -89,9 +92,9 @@ const Index = () => {
           </h1>
           <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 max-w-4xl mx-auto shadow-xl border border-white/50">
             <p className="text-2xl text-purple-700 leading-relaxed font-medium">
-
-              Your safe space to find guidance, inspiration, and a personalized podcast to help you navigate 
-              life's challenges. You're heard, you're understood and your voice matters.
+              Your safe space to find guidance, inspiration, and a personalized
+              podcast to help you navigate life's challenges. You're heard,
+              you're understood and your voice matters.
               <span className="inline-block ml-2 text-3xl">🌟💕✨</span>
             </p>
           </div>
