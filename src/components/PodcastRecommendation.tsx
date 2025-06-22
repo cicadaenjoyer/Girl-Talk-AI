@@ -12,6 +12,15 @@ interface Podcast {
   audioUrl?: string; // field for generated audio URL
 }
 
+const handlePlayAudio = () => {
+  const audioElement = document.getElementById(
+    "podcast-audio"
+  ) as HTMLAudioElement;
+  if (audioElement) {
+    audioElement.play();
+  }
+};
+
 interface PodcastRecommendationProps {
   podcast: Podcast;
   userMessage: string;
@@ -106,7 +115,10 @@ const PodcastRecommendation = ({
               </div>
 
               <Button
-                onClick={onListenClick}
+                onClick={() => {
+                  onListenClick();
+                  handlePlayAudio();
+                }}
                 className="bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 hover:from-purple-600 hover:via-pink-600 hover:to-blue-600 text-white font-bold px-8 py-3 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl relative overflow-hidden"
               >
                 <div className="flex items-center space-x-2 relative z-10">
@@ -115,9 +127,10 @@ const PodcastRecommendation = ({
                   <span className="text-xl">▶️</span>
                   {podcast.audioUrl && (
                     <audio
+                      id="podcast-audio"
                       controls
                       src={podcast.audioUrl}
-                      className="mt-4 w-full"
+                      className="hidden"
                     >
                       Your browser does not support the audio element.
                     </audio>
