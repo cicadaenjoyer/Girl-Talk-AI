@@ -14,8 +14,8 @@ Girl Talk AI is your safe space to find guidance, inspiration, and the perfect p
 
 ### Prerequisites
 
--   Node.js 18+ (recommended: install with [nvm](https://github.com/nvm-sh/nvm#installing-and-updating))
--   npm or bun package manager
+- Node.js 18+ (recommended: install with [nvm](https://github.com/nvm-sh/nvm#installing-and-updating))
+- npm or bun package manager
 
 ### Installation
 
@@ -38,6 +38,7 @@ bun install
 
 ```bash
 npm run dev
+node src/api/TTS.ts
 # or
 bun dev
 ```
@@ -48,48 +49,48 @@ bun dev
 
 ### Tech Stack
 
--   **Frontend Framework**: React 18.3+ with TypeScript
--   **Build Tool**: Vite 5.4+ for fast development and optimized builds
--   **Styling**: Tailwind CSS 3.4+ with custom gradients and animations
--   **UI Components**: shadcn/ui with Radix UI primitives
--   **Routing**: React Router DOM for navigation
--   **State Management**: React hooks with local state management
--   **Icons**: Lucide React for beautiful, consistent icons
--   **Notifications**: Sonner for toast notifications
+- **Frontend Framework**: React 18.3+ with TypeScript
+- **Build Tool**: Vite 5.4+ for fast development and optimized builds
+- **Styling**: Tailwind CSS 3.4+ with custom gradients and animations
+- **UI Components**: shadcn/ui with Radix UI primitives
+- **Routing**: React Router DOM for navigation
+- **State Management**: React hooks with local state management
+- **Icons**: Lucide React for beautiful, consistent icons
+- **Notifications**: Sonner for toast notifications
 
 ### Architecture
 
 The application consists of:
 
--   A React SPA with TypeScript for type safety
--   Component-based architecture with reusable UI components
--   Dynamic podcast recommendation system based on user input
--   Responsive design with beautiful gradients and animations
--   Resource matching algorithm that provides contextual support links
--   Multi-page navigation with dedicated sections for different needs
+- A React SPA with TypeScript for type safety
+- Component-based architecture with reusable UI components
+- Dynamic podcast recommendation system based on user input
+- Responsive design with beautiful gradients and animations
+- Resource matching algorithm that provides contextual support links
+- Multi-page navigation with dedicated sections for different needs
 
 ### Key Components
 
 #### Pages
 
--   **Index (`/`)**: Main landing page with chat interface and podcast recommendations
--   **Get Support (`/get-support`)**: Dedicated support page with personalized episode generation
--   **Browse Podcasts (`/browse-podcasts`)**: Catalog of available podcast episodes
--   **About Us (`/about-us`)**: Team information and platform values
+- **Index (`/`)**: Main landing page with chat interface and podcast recommendations
+- **Get Support (`/get-support`)**: Dedicated support page with personalized episode generation
+- **Browse Podcasts (`/browse-podcasts`)**: Catalog of available podcast episodes
+- **About Us (`/about-us`)**: Team information and platform values
 
 #### Core Components
 
--   **ChatBox**: Interactive input interface for users to share their thoughts
--   **PodcastRecommendation**: Displays personalized podcast episodes with play functionality
--   **HelpfulResources**: Context-aware resource suggestions (crisis lines, articles, communities)
--   **Navigation**: Beautiful animated navigation with gradient effects
+- **ChatBox**: Interactive input interface for users to share their thoughts
+- **PodcastRecommendation**: Displays personalized podcast episodes with play functionality
+- **HelpfulResources**: Context-aware resource suggestions (crisis lines, articles, communities)
+- **Navigation**: Beautiful animated navigation with gradient effects
 
 #### Features
 
--   **Smart Matching**: Keyword-based algorithm matches user messages to relevant podcast content
--   **Resource Curation**: Automatic generation of helpful resources based on user needs
--   **Beautiful UI**: Gradient backgrounds, floating animations, and emoji-rich design
--   **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+- **Smart Matching**: Keyword-based algorithm matches user messages to relevant podcast content
+- **Resource Curation**: Automatic generation of helpful resources based on user needs
+- **Beautiful UI**: Gradient backgrounds, floating animations, and emoji-rich design
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
 
 ### User Experience Flow
 
@@ -103,27 +104,27 @@ The application consists of:
 
 ### Personalized Podcast Generation
 
--   AI-powered matching system that analyzes user input
--   Curated episodes covering topics like:
-    -   Building self-confidence and self-worth
-    -   Navigating friendship drama and relationships
-    -   Managing academic pressure and stress
-    -   Body positivity and self-acceptance
-    -   Standing up to bullying and finding your voice
+- AI-powered matching system that analyzes user input
+- Curated episodes covering topics like:
+  - Building self-confidence and self-worth
+  - Navigating friendship drama and relationships
+  - Managing academic pressure and stress
+  - Body positivity and self-acceptance
+  - Standing up to bullying and finding your voice
 
 ### Contextual Resource Matching
 
--   **Crisis Support**: 24/7 text lines and hotlines for immediate help
--   **Educational Articles**: Guides on confidence, relationships, and wellness
--   **Community Forums**: Safe spaces to connect with others facing similar challenges
--   **Practical Tools**: Study skills, stress management, and coping strategies
+- **Crisis Support**: 24/7 text lines and hotlines for immediate help
+- **Educational Articles**: Guides on confidence, relationships, and wellness
+- **Community Forums**: Safe spaces to connect with others facing similar challenges
+- **Practical Tools**: Study skills, stress management, and coping strategies
 
 ### Beautiful, Inclusive Design
 
--   Warm gradient backgrounds with floating animations
--   Emoji-rich interface that feels friendly and approachable
--   Accessibility-focused UI components from shadcn/ui
--   Mobile-responsive design for support anywhere, anytime
+- Warm gradient backgrounds with floating animations
+- Emoji-rich interface that feels friendly and approachable
+- Accessibility-focused UI components from shadcn/ui
+- Mobile-responsive design for support anywhere, anytime
 
 ## 🏗️ Project Structure
 
@@ -149,11 +150,11 @@ src/
 
 Girl Talk AI embraces a design philosophy centered on:
 
--   **Warmth & Safety**: Soft gradients, rounded corners, and comforting colors
--   **Empowerment**: Bold typography and confident messaging
--   **Playfulness**: Animated elements and emoji integration
--   **Accessibility**: High contrast ratios and semantic HTML
--   **Inclusivity**: Language and imagery that welcomes all women
+- **Warmth & Safety**: Soft gradients, rounded corners, and comforting colors
+- **Empowerment**: Bold typography and confident messaging
+- **Playfulness**: Animated elements and emoji integration
+- **Accessibility**: High contrast ratios and semantic HTML
+- **Inclusivity**: Language and imagery that welcomes all women
 
 ## 🌍 Social Impact & Track Alignment
 
@@ -163,41 +164,41 @@ Girl Talk AI directly addresses critical social challenges facing women and girl
 
 #### **Mental Health Crisis**
 
--   **Problem**: 1 in 5 women experience mental health challenges, with limited accessible resources
--   **Solution**: Immediate, personalized support through AI-powered podcast recommendations and crisis resource connections
--   **Impact**: Reduces barriers to mental health support by providing 24/7 accessible, stigma-free assistance
+- **Problem**: 1 in 5 women experience mental health challenges, with limited accessible resources
+- **Solution**: Immediate, personalized support through AI-powered podcast recommendations and crisis resource connections
+- **Impact**: Reduces barriers to mental health support by providing 24/7 accessible, stigma-free assistance
 
 #### **Digital Equity & Accessibility**
 
--   **Problem**: Mental health resources are often expensive, location-dependent, or require appointments
--   **Solution**: Free, web-based platform accessible from any device with internet connection
--   **Impact**: Democratizes access to supportive content and professional resources regardless of economic status
+- **Problem**: Mental health resources are often expensive, location-dependent, or require appointments
+- **Solution**: Free, web-based platform accessible from any device with internet connection
+- **Impact**: Democratizes access to supportive content and professional resources regardless of economic status
 
 #### **Community Building & Peer Support**
 
--   **Problem**: Many women feel isolated in their struggles, lacking safe spaces for support
--   **Solution**: Curated community resources and peer support networks integrated into the platform
--   **Impact**: Connects users to like-minded communities and reduces feelings of isolation
+- **Problem**: Many women feel isolated in their struggles, lacking safe spaces for support
+- **Solution**: Curated community resources and peer support networks integrated into the platform
+- **Impact**: Connects users to like-minded communities and reduces feelings of isolation
 
 #### **Education & Empowerment**
 
--   **Problem**: Lack of accessible, age-appropriate content addressing women's specific challenges
--   **Solution**: Personalized educational content covering topics from self-confidence to academic pressure
--   **Impact**: Empowers users with knowledge and coping strategies for long-term resilience
+- **Problem**: Lack of accessible, age-appropriate content addressing women's specific challenges
+- **Solution**: Personalized educational content covering topics from self-confidence to academic pressure
+- **Impact**: Empowers users with knowledge and coping strategies for long-term resilience
 
 ### Measurable Social Outcomes
 
--   **Accessibility**: 100% client-side processing ensures privacy and reduces technical barriers
--   **Inclusivity**: Multi-topic support covers diverse challenges (confidence, relationships, academic stress, bullying)
--   **Safety**: Prominent crisis resource integration provides immediate professional help when needed
--   **Scalability**: Web-based platform can reach unlimited users without additional infrastructure costs
+- **Accessibility**: 100% client-side processing ensures privacy and reduces technical barriers
+- **Inclusivity**: Multi-topic support covers diverse challenges (confidence, relationships, academic stress, bullying)
+- **Safety**: Prominent crisis resource integration provides immediate professional help when needed
+- **Scalability**: Web-based platform can reach unlimited users without additional infrastructure costs
 
 ### Target Impact Metrics
 
--   **Reach**: Supporting women across age groups, backgrounds, and geographic locations
--   **Response Time**: Instant personalized recommendations vs. weeks for traditional therapy appointments
--   **Cost**: Free access vs. $100-200+ per therapy session
--   **Availability**: 24/7 support vs. limited business hours for traditional services
+- **Reach**: Supporting women across age groups, backgrounds, and geographic locations
+- **Response Time**: Instant personalized recommendations vs. weeks for traditional therapy appointments
+- **Cost**: Free access vs. $100-200+ per therapy session
+- **Availability**: 24/7 support vs. limited business hours for traditional services
 
 ## 📱 Deployment
 
@@ -216,10 +217,10 @@ The application runs entirely client-side with no backend dependencies required 
 
 Girl Talk AI prioritizes user privacy and safety:
 
--   No personal data is stored or transmitted
--   All processing happens locally in the browser
--   Crisis resources are prominently featured
--   Content is designed to be supportive, never diagnostic
+- No personal data is stored or transmitted
+- All processing happens locally in the browser
+- Crisis resources are prominently featured
+- Content is designed to be supportive, never diagnostic
 
 ## 🌈 Acknowledgments
 
