@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { playSpeechSynthesis } from '@/api/podcasts';
 
 interface Podcast {
     id: string;
@@ -13,15 +14,6 @@ interface Podcast {
     generatedScript?: string; // field for AI-generated podcast script
 }
 
-const handlePlayAudio = () => {
-    const audioElement = document.getElementById(
-        'podcast-audio'
-    ) as HTMLAudioElement;
-    if (audioElement) {
-        audioElement.play();
-    }
-};
-
 interface PodcastRecommendationProps {
     podcast: Podcast;
     userMessage: string;
@@ -33,6 +25,39 @@ const PodcastRecommendation = ({
     userMessage,
     onListenClick
 }: PodcastRecommendationProps) => {
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const handlePlayAudio = async () => {
+        if (podcast.audioUrl?.startsWith('speech-synthesis:')) {
+            // Handle speech synthesis
+            try {
+                setIsPlaying(true);
+                await playSpeechSynthesis(podcast.generatedScript || podcast.description);
+                setIsPlaying(false);
+            } catch (error) {
+                console.error('Error playing speech synthesis:', error);
+                setIsPlaying(false);
+            }
+        } else if (podcast.audioUrl) {
+            // Handle regular audio file
+            const audioElement = document.getElementById(
+                'podcast-audio'
+            ) as HTMLAudioElement;
+            if (audioElement) {
+                audioElement.play();
+            }
+        } else {
+            // Fallback to speech synthesis with generated script
+            try {
+                setIsPlaying(true);
+                await playSpeechSynthesis(podcast.generatedScript || podcast.description);
+                setIsPlaying(false);
+            } catch (error) {
+                console.error('Error playing fallback speech synthesis:', error);
+                setIsPlaying(false);
+            }
+        }
+    };
     return (
         <div className="relative animate-fade-in">
             {/* Floating background elements */}
@@ -122,13 +147,24 @@ const PodcastRecommendation = ({
                                     onListenClick();
                                     handlePlayAudio();
                                 }}
-                                className="bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 hover:from-purple-600 hover:via-pink-600 hover:to-blue-600 text-white font-bold px-8 py-3 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl relative overflow-hidden"
+                                disabled={isPlaying}
+                                className="bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 hover:from-purple-600 hover:via-pink-600 hover:to-blue-600 text-white font-bold px-8 py-3 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
                             >
                                 <div className="flex items-center space-x-2 relative z-10">
-                                    <span className="text-xl">🎵</span>
-                                    <span className="text-lg">Listen Now</span>
-                                    <span className="text-xl">▶️</span>
-                                    {podcast.audioUrl && (
+                                    {isPlaying ? (
+                                        <>
+                                            <span className="text-xl animate-pulse">🎵</span>
+                                            <span className="text-lg">Playing...</span>
+                                            <span className="text-xl animate-spin">⏸️</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span className="text-xl">🎵</span>
+                                            <span className="text-lg">Listen Now</span>
+                                            <span className="text-xl">▶️</span>
+                                        </>
+                                    )}
+                                    {podcast.audioUrl && !podcast.audioUrl.startsWith('speech-synthesis:') && (
                                         <audio
                                             id="podcast-audio"
                                             controls
