@@ -5,6 +5,7 @@ import {
   getDocs,
   getDoc,
   setDoc,
+  updateDoc,
   doc,
   collection
 } from 'firebase/firestore/lite';
@@ -22,6 +23,28 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+
+/**
+ * Stores a podcast to the user's database
+ **/
+export async function storePodcast(podcast: Podcast, db_id: string) { 
+  const userRef = doc(db, 'users', db_id);
+  const userSnap = await getDoc(userRef);
+
+  if (userSnap.exists()) {
+    await updateDoc(userRef, {
+      podcasts: arrayUnion(podcast)
+    });
+    console.log(`Added podcast ${podcast.title} to user ${db_id}.`);
+  } else {
+    console.log(`User ${db_id} does not exist, creating it first.`);
+    await setDoc(userRef, {
+      createdAt: new Date().toISOString(),
+      podcasts: [podcast]
+    });
+  }
+}
+
 /**
  * Creates a database for the user
 **/
@@ -32,7 +55,8 @@ export async function createDatabase(db_id: string) {
   if (!userSnap.exists()) {
     // Create with initial data
     await setDoc(userRef, { 
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      podcasts: []
     });
     console.log(`Created user ${db_id}.`);
   } else {

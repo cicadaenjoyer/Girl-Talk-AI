@@ -22,6 +22,7 @@ const Index = () => {
     try {
       const matchedPodcast = await generatePodcast(message);
       setRecommendedPodcast(matchedPodcast);
+      storePodcast(matchedPodcast, String(user.db_id));
       toast({
         title: "Custom episode generated! 💕",
         description:
