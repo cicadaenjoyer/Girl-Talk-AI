@@ -1,5 +1,6 @@
 
 import { initializeApp } from 'firebase/app';
+import { generatePodcast, type Podcast } from '@/api/podcasts';
 import {
   getFirestore,
   getDocs,
