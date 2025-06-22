@@ -8,26 +8,29 @@ import Index from "./pages/Index";
 import GetSupport from "./pages/GetSupport";
 import BrowsePodcasts from "./pages/BrowsePodcasts";
 import AboutUs from "./pages/AboutUs";
-import NotFound from "./pages/NotFound";
+import NotFound from "./pages/NotFound.tsx";
+import { UserProvider } from "./context/UserContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/get-support" element={<GetSupport />} />
-          <Route path="/browse-podcasts" element={<BrowsePodcasts />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <UserProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/get-support" element={<GetSupport />} />
+            <Route path="/browse-podcasts" element={<BrowsePodcasts />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </UserProvider>
   </QueryClientProvider>
 );
 
