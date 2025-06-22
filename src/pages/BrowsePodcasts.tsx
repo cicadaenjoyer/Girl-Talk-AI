@@ -2,9 +2,27 @@
 import React from 'react';
 import Navigation from '@/components/Navigation';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+import { useState } from 'react'; // Add this line
+import ChatBox from '@/components/ChatBox';
 
 const BrowsePodcastsPage = () => {
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false); // Add this line
+
+  // Add this function:
+  const handleChatSubmit = async (message) => {
+    setIsLoading(true);
+
+    // Simulate API call delay
+    setTimeout(() => {
+      toast({
+        title: "Message received! 💬",
+        description: "Thank you for sharing your thoughts. We'll get back to you shortly!",
+      });
+      setIsLoading(false);
+    }, 2000);
+  };
 
   const podcastCategories = [
     {
@@ -103,7 +121,16 @@ const BrowsePodcastsPage = () => {
             </p>
           </div>
         </div>
+        
+        <div className="mb-12">
+          <ChatBox onSubmit={handleChatSubmit} isLoading={isLoading} />
+        </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    
+        </div>
         {/* Podcast Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {podcastCategories.map((category, index) => (
@@ -194,9 +221,6 @@ const BrowsePodcastsPage = () => {
 };
 
 export { BrowsePodcastsPage };
-import { useState } from 'react';
-import ChatBox from '@/components/ChatBox';
-import { useToast } from '@/hooks/use-toast';
 
 const BrowsePodcasts = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -313,4 +337,4 @@ const BrowsePodcasts = () => {
   );
 };
 
-export default BrowsePodcasts;
+export default BrowsePodcastsPage;
