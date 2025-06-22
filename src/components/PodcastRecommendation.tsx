@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { playSpeechSynthesis, stopSpeechSynthesis } from "@/api/podcasts";
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 interface Podcast {
   id: string;
@@ -62,6 +64,18 @@ const PodcastRecommendation = ({
       }
     }
   };
+  const handlePlayAudio = async () => {
+    if (podcast.audioUrl) {
+      const audioElement = document.getElementById(
+        "podcast-audio"
+      ) as HTMLAudioElement;
+      if (audioElement) {
+        audioElement.play();
+        setIsPlaying(true);
+        audioElement.onended = () => setIsPlaying(false);
+      }
+    }
+  };
 
   const handleStopAudio = () => {
     setIsPlaying(false);
@@ -76,6 +90,23 @@ const PodcastRecommendation = ({
       audioElement.currentTime = 0;
     }
   };
+  return (
+    <div className="relative animate-fade-in">
+      {/* Floating background elements */}
+      <div className="absolute -top-10 -left-10 w-24 h-24 bg-gradient-to-br from-pink-200 to-purple-200 rounded-full opacity-30 animate-pulse"></div>
+      <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-gradient-to-br from-blue-200 to-pink-200 rounded-full opacity-25 animate-bounce"></div>
+      <div className="absolute top-1/2 -left-6 w-16 h-16 bg-gradient-to-br from-purple-200 to-blue-200 rounded-full opacity-20 animate-pulse"></div>
+  const handleStopAudio = () => {
+    setIsPlaying(false);
+    const audioElement = document.getElementById(
+      "podcast-audio"
+    ) as HTMLAudioElement;
+    if (audioElement) {
+      audioElement.pause();
+      audioElement.currentTime = 0;
+    }
+  };
+
   return (
     <div className="relative animate-fade-in">
       {/* Floating background elements */}
@@ -141,7 +172,7 @@ const PodcastRecommendation = ({
                 </p>
               </div>
 
-              <p className="bg-gradient-to-br from-pink-50 to-purple-50 p-4 rounded-xl border border-purple-200/50 max-h-64 overflow-y-auto mb-4">
+              <p className="text-gray-700 text-base mb-4 leading-relaxed bg-gradient-to-r from-pink-50 to-purple-50 p-3 rounded-xl border border-purple-100 max-h-64 overflow-y-auto">
                 {podcast.description}
               </p>
 
@@ -208,6 +239,20 @@ const PodcastRecommendation = ({
                       Your browser does not support the audio element.
                     </audio>
                   )}
+              </div>
+            </div>
+          </div>
+        </div>
+                {podcast.audioUrl && (
+                  <audio
+                    id="podcast-audio"
+                    controls
+                    src={podcast.audioUrl}
+                    className="hidden"
+                  >
+                    Your browser does not support the audio element.
+                  </audio>
+                )}
               </div>
             </div>
           </div>

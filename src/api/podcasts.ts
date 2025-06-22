@@ -1,3 +1,4 @@
+import axios from "axios";
 export interface Podcast {
   id: string;
   title: string;
@@ -122,7 +123,7 @@ export const findMatchingPodcast = (userMessage: string): Podcast => {
   return samplePodcasts[0];
 };
 
-// Generate script using fallback approach (API calls don't work directly from browser due to CORS)
+// Generate script using Hyperbolic API
 export const generateScript = async (
   userMessage: string,
   category: string
@@ -198,9 +199,43 @@ Remember, you are strong, you are worthy, and you deserve to be treated with res
   );
 
   return personalizedScript;
+  try {
+    const response = await axios.post(
+      "https://api.hyperbolic.xyz/v1/chat/completions",
+      {
+        messages: [
+          {
+            role: "system",
+            content: `You are creating an AI \"big sister\" podcast for young girls. Generate empathetic, age-appropriate advice in a warm tone. Create a short podcast script (300-400 words). Start with: \"Hi! My name is Aisha, and this is Girl Talk AI.\" Keep it personal and relate to ${category}.`,
+          },
+          {
+            role: "user",
+            content: userMessage,
+          },
+        ],
+        model: "Qwen/Qwen3-235B-A22B",
+        max_tokens: 500,
+        temperature: 0.7,
+        top_p: 0.9,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0b201NjR0b21AZ21haWwuY29tIiwiaWF0IjoxNzI5NDEyNTc0fQ.KgY38Ei_OdtDH1vR_YRbb-zQX6AABi0VBn7qowd5AA4",
+        },
+      }
+    );
+    return (
+      response.data.choices?.[0]?.message?.content || "Script generation failed"
+    );
+  } catch (error) {
+    console.error("Error generating script:", error);
+    return `Hi! My name is Aisha, and this is Girl Talk AI. I understand you're dealing with: \"${userMessage}\". Let me help you with that.`;
+  }
 };
 
-// Generate audio using Web Speech API
+// Generate audio using Murf AI (via backend API)
 export const generateAudio = async (text: string): Promise<string | null> => {
   try {
     // Check if browser supports Speech Synthesis
@@ -236,6 +271,16 @@ export const generateAudio = async (text: string): Promise<string | null> => {
 
     // Fallback: return null to indicate no audio available
     return null;
+  } catch (error) {
+    console.error("Error generating audio:", error);
+    return null;
+  }
+  try {
+    const response = await axios.post("/api/generatePodcast", {
+      text,
+      voiceId: "en-US-ariana",
+    });
+    return response.data.audioFile || null;
   } catch (error) {
     console.error("Error generating audio:", error);
     return null;
@@ -354,16 +399,43 @@ export const stopSpeechSynthesis = (): void => {
     speechSynthesis.cancel();
   }
 };
+
 export const generatePodcast = async (
   userMessage: string
 ): Promise<Podcast> => {
-  const podcast = findMatchingPodcast(userMessage);
-
-  // Call your backend API instead of Murf directly
-  const response = await axios.post("/api/generatePodcast", {
-    text: podcast.description, // or userMessage, or whatever you want spoken
-    voiceId: "en-US-ariana",
-  });
-
-  return { ...podcast, audioUrl: response.data.audioFile };
+  const matchedPodcast = findMatchingPodcast(userMessage);
+  try {
+    // Step 1: Generate personalized script using Hyperbolic
+    const generatedScript = await generateScript(
+      userMessage,
+      matchedPodcast.category
+    );
+    // Step 2: Generate audio from the script using Murf AI
+    const audioUrl = await generateAudio(generatedScript);
+    // Step 3: Create personalized podcast
+    const personalizedPodcast: Podcast = {
+      ...matchedPodcast,
+      id: `${matchedPodcast.id}_personalized_${Date.now()}`,
+      title: `Personal Advice: ${matchedPodcast.title}`,
+      description: generatedScript,
+      generatedScript: generatedScript,
+      audioUrl: audioUrl || undefined,
+    };
+    return personalizedPodcast;
+  } catch (error) {
+    console.error("Error generating personalized podcast:", error);
+    // Fallback: Create podcast with generated script but no audio
+    const fallbackScript = await generateScript(
+      userMessage,
+      matchedPodcast.category
+    );
+    return {
+      ...matchedPodcast,
+      id: `${matchedPodcast.id}_fallback_${Date.now()}`,
+      title: `Personal Advice: ${matchedPodcast.title}`,
+      description: fallbackScript,
+      generatedScript: fallbackScript,
+      audioUrl: undefined,
+    };
+  }
 };
