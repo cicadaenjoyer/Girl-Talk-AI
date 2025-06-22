@@ -75,33 +75,9 @@ const GetSupport = () => {
           <h1 className="text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-6 leading-tight">
             Get Support
           </h1>
-          <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 max-w-4xl mx-auto shadow-xl border border-white/50">
-            <p className="text-2xl text-purple-700 leading-relaxed font-medium">
-              Share what's on your mind and we'll create a personalized podcast episode just for you. 
-              You're not alone in this journey! 
-              <span className="inline-block ml-2 text-3xl">🌟💪✨</span>
-            </p>
-          </div>
         </div>
 
-        {/* Chat Interface */}
-        <div className="mb-12">
-          <ChatBox onSubmit={handleChatSubmit} isLoading={isLoading} />
-        </div>
-
-        {/* Podcast Recommendation and Resources */}
-        {recommendedPodcast && !isLoading && (
-          <div className="space-y-8 mb-12">
-            <PodcastRecommendation
-              podcast={recommendedPodcast}
-              userMessage={userMessage}
-              onListenClick={handleListenClick}
-            />
-            
-            <HelpfulResources userMessage={userMessage} />
-          </div>
-        )}
-
+        
         {/* Motivational Section */}
         {!recommendedPodcast && !isLoading && (
           <div className="mt-20 relative">
