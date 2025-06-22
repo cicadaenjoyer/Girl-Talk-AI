@@ -15,11 +15,10 @@ export interface Podcast {
 export const samplePodcasts: Podcast[] = [
   {
     id: "1",
-    title: "Building Confidence from the Inside Out",
-    host: "Dr. Maya Johnson",
-    description:
-      "Learn practical strategies to build unshakeable self-confidence and believe in your own worth.",
-    duration: "25 min",
+    title: "Your Personal Podcast",
+    host: "Aisha",
+    description: "Expert advice",
+    duration: "10 min",
     category: "Self-Confidence",
     imageUrl: "/placeholder-podcast.jpg",
     keywords: [
@@ -33,11 +32,10 @@ export const samplePodcasts: Podcast[] = [
   },
   {
     id: "2",
-    title: "Navigating Friendship Drama Like a Boss",
-    host: "Sarah Chen",
-    description:
-      "Expert advice on handling friendship conflicts, setting boundaries, and building healthy relationships.",
-    duration: "18 min",
+    title: "Your Personal Podcast",
+    host: "Aisha",
+    description: "Expert advice",
+    duration: "10 min",
     category: "Relationships",
     imageUrl: "/placeholder-podcast.jpg",
     keywords: [
@@ -51,11 +49,10 @@ export const samplePodcasts: Podcast[] = [
   },
   {
     id: "3",
-    title: "Academic Pressure and Finding Balance",
-    host: "Prof. Angela Rivera",
-    description:
-      "Tips for managing school stress, perfectionism, and finding a healthy work-life balance.",
-    duration: "22 min",
+    title: "Your Personal Podcast",
+    host: "Aisha",
+    description: "Expert advice",
+    duration: "10 min",
     category: "Academic Success",
     imageUrl: "/placeholder-podcast.jpg",
     keywords: [
@@ -70,11 +67,10 @@ export const samplePodcasts: Podcast[] = [
   },
   {
     id: "4",
-    title: "Your Body, Your Rules: Embracing Self-Love",
-    host: "Zoe Martinez",
-    description:
-      "A powerful discussion about body positivity, self-acceptance, and loving yourself exactly as you are.",
-    duration: "30 min",
+    title: "Your Personal Podcast",
+    host: "Aisha",
+    description: "Expert advice",
+    duration: "10 min",
     category: "Body Positivity",
     imageUrl: "/placeholder-podcast.jpg",
     keywords: [
@@ -88,11 +84,10 @@ export const samplePodcasts: Podcast[] = [
   },
   {
     id: "5",
-    title: "Standing Up to Bullies and Finding Your Voice",
-    host: "Coach Michelle Thompson",
-    description:
-      "Empowering strategies for dealing with bullying, finding your inner strength, and speaking up for yourself.",
-    duration: "28 min",
+    title: "Your Personal Podcast",
+    host: "Aisha",
+    description: "Expert advice",
+    duration: "10 min",
     category: "Empowerment",
     imageUrl: "/placeholder-podcast.jpg",
     keywords: [
@@ -134,16 +129,24 @@ export const generateScript = async (
         messages: [
           {
             role: "system",
-            content: `You are creating an AI \"big sister\" podcast for young girls. Generate empathetic, age-appropriate advice in a warm tone. Create a short podcast script (300-400 words). Start with: \"Hi! My name is Aisha, and this is Girl Talk AI.\" Keep it personal and relate to ${category}.`,
+            content: `Preface with: "Hey Girly,". Generate empathetic, age-appropriate ,friendly, advice in a warm, “big sister” tone, but still be energetic.
+
+Try and incorperate a moderate amount slang thats "cool with the kids". Like yass, slay, girly pop, tweaking out, mama, girlboss, etc, etc. Like TikTok slang. 
+
+Convert that into a “podcast script” (~7-10min * 150 wpm) .
+
+just output the script, absolutely no fluff
+
+`,
           },
           {
             role: "user",
             content: userMessage,
           },
         ],
-        model: "Qwen/Qwen3-235B-A22B",
-        max_tokens: 500,
-        temperature: 0.7,
+        model: "meta-llama/Llama-3.3-70B-Instruct",
+        max_tokens: 98886,
+        temperature: 0.1,
         top_p: 0.9,
       },
       {
@@ -169,6 +172,7 @@ export const generateAudio = async (text: string): Promise<string | null> => {
     const response = await axios.post("/api/generatePodcast", {
       text,
       voiceId: "en-US-ariana",
+      //   rate: 10,
     });
     return response.data.audioFile || null;
   } catch (error) {
