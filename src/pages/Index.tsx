@@ -5,12 +5,14 @@ import ChatBox from '@/components/ChatBox';
 import PodcastRecommendation from '@/components/PodcastRecommendation';
 import HelpfulResources from '@/components/HelpfulResources';
 import { generatePodcast, type Podcast } from '@/api/podcasts';
+import { useUser } from '@/context/UserContext';
 import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [recommendedPodcast, setRecommendedPodcast] = useState<Podcast | null>(null);
   const [userMessage, setUserMessage] = useState('');
+  const user = useUser();
   const { toast } = useToast();
 
   const handleChatSubmit = async (message: string) => {
@@ -19,7 +21,7 @@ const Index = () => {
     
     // Simulate API call delay
     setTimeout(() => {
-      const matchedPodcast = generatePodcast(message)
+      const matchedPodcast = generatePodcast(message, String(user.db_id));
       setRecommendedPodcast(matchedPodcast);
       setIsLoading(false);
       

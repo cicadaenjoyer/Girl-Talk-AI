@@ -1,4 +1,6 @@
 
+import { createDatabase, getUser } from '@/api/firebase.ts';
+
 export interface Podcast {
   id: string;
   title: string;
@@ -80,8 +82,16 @@ export const findMatchingPodcast = (userMessage: string): Podcast => {
 
 // TODO: Setup an API hook and generate a podcast episode through an
 // API call
-export const generatePodcast = (userMessage: string): Podcast => {
+export const generatePodcast = (userMessage: string, db_id: number): Podcast => {
   const message = userMessage.toLocaleLowerCase();
+  let user_data = Object.create(null);
+
+  // checking if user exists in the db
+  if (getUser(db_id) == null) {
+    user_data = rcreateDatabase(db_id);
+    console.log(user_data);
+    return user_data;
+  }
 
   // Default fallback
   return samplePodcasts[0]
