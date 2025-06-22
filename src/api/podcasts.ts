@@ -10,6 +10,7 @@ export interface Podcast {
   imageUrl: string;
   keywords: string[];
   audioUrl?: any; //  field for generated audio URL
+  generatedScript?: string; // field for AI-generated podcast script
 }
 
 // const config = {
@@ -132,25 +133,71 @@ export const findMatchingPodcast = (userMessage: string): Podcast => {
 export const generatePodcast = async (
   userMessage: string
 ): Promise<Podcast> => {
-  // ...existing logic to pick a podcast...
-  const podcast = samplePodcasts[0]; // or your matching logic
+  // Find matching podcast based on user message
+  const matchedPodcast = findMatchingPodcast(userMessage);
 
-  // Call Murf API
+  try {
+    // Call Hyperbolic API to generate personalized podcast script
+    const response = await axios.post(
+      "https://api.hyperbolic.xyz/v1/chat/completions",
+      {
+        messages: [
+          {
+            role: "system",
+            content: `You are creating an AI "big sister" podcast-style platform for young girls.
 
-  const response = await axios.post(
-    "https://api.murf.ai/v1/speech/generate",
-    {
-      text: podcast.description, // or userMessage, or whatever you want spoken
-      voiceId: "en-US-terrell",
-    },
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "api-key": "ap2_b7936677-f74d-43d0-a993-40d78f812b69",
+Generate empathetic, age-appropriate, friendly advice in a warm, "big sister" tone.
+
+Convert that into a short "podcast script" (~1-2 min * 150 wpm)
+
+Preface with:
+"Hi! My name is Aisha, and this is Girl Talk AI, a safe space for girls to get advice on anything from school stress, friendship drama, or more personal matters. Let's talk about what's on your mind today…"
+
+150wpm speaking, generate in 500 word blocks
+
+Just output the script, no fluff. Make it personal and relate to the specific category: ${matchedPodcast.category}`
+          },
+          {
+            role: "user",
+            content: userMessage
+          }
+        ],
+        model: "Qwen/Qwen3-235B-A22B", 
+        max_tokens: 29820,
+        temperature: 0.1,
+        top_p: 0.9
       },
-    }
-  );
-  console.log("Murf API response:", response.data);
-  return { ...podcast, audioUrl: response.data.audioFile };
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0b201NjR0b21AZ21haWwuY29tIiwiaWF0IjoxNzI5NDEyNTc0fQ.KgY38Ei_OdtDH1vR_YRbb-zQX6AABi0VBn7qowd5AA4"
+        }
+      }
+    );
+
+    console.log("Hyperbolic API response:", response.data);
+    
+    // Extract the generated script from the response
+    const generatedScript = response.data.choices?.[0]?.message?.content || matchedPodcast.description;
+    
+    // Create personalized podcast with AI-generated content
+    const personalizedPodcast: Podcast = {
+      ...matchedPodcast,
+      id: `${matchedPodcast.id}_personalized_${Date.now()}`,
+      title: `Personal Advice: ${matchedPodcast.title}`,
+      description: `A personalized episode just for you about: ${userMessage}`,
+      generatedScript: generatedScript
+    };
+
+    return personalizedPodcast;
+    
+  } catch (error) {
+    console.error("Error generating personalized podcast:", error);
+    
+    // Fallback to original podcast if API fails
+    return {
+      ...matchedPodcast,
+      generatedScript: `Hi! My name is Aisha, and this is Girl Talk AI. I understand you're dealing with: "${userMessage}". ${matchedPodcast.description}`
+    };
+  }
 };

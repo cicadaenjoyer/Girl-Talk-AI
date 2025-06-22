@@ -10,6 +10,7 @@ interface Podcast {
   category: string;
   imageUrl: string;
   audioUrl?: string; // field for generated audio URL
+  generatedScript?: string; // field for AI-generated podcast script
 }
 
 const handlePlayAudio = () => {
@@ -162,6 +163,34 @@ const PodcastRecommendation = ({
             </div>
           </div>
         </div>
+
+        {/* AI Generated Script Section */}
+        {podcast.generatedScript && (
+          <div className="mt-6 p-6 bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/70 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-400 to-purple-400"></div>
+            <div className="flex items-start space-x-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
+                <span className="text-2xl">🎙️</span>
+              </div>
+              <div className="flex-1">
+                <h5 className="font-bold text-purple-800 text-lg mb-3 flex items-center">
+                  <span className="mr-2">AI-Generated Podcast Script</span>
+                  <span className="text-sm bg-gradient-to-r from-pink-400 to-purple-500 text-white px-3 py-1 rounded-full">✨ Just for You</span>
+                </h5>
+                <div className="bg-gradient-to-br from-pink-50 to-purple-50 p-4 rounded-xl border border-purple-200/50 max-h-64 overflow-y-auto">
+                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap font-medium">
+                    {podcast.generatedScript}
+                  </p>
+                </div>
+                <div className="mt-3 text-center">
+                  <p className="text-sm text-purple-600 italic">
+                    💕 This personalized script was created by AI based on your specific situation
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
